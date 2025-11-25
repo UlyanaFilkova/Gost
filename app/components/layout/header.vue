@@ -119,7 +119,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 /* ---------------- Основной хедер ---------------- */
 
 .main-header {
-  background: #2c3e50 !important;
+  background: var(--color-primary) !important;
   color: white;
 }
 
