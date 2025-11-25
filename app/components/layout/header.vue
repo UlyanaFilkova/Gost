@@ -2,7 +2,6 @@
 import type { NavigationMenuItem } from '@nuxt/ui'
 const route = useRoute()
 
-/** Пункты меню строго по NavigationMenuItem */
 const items = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Главная',
@@ -49,7 +48,6 @@ const items = computed<NavigationMenuItem[]>(() => [
 
 <template>
   <header class="header">
-    <!-- верхняя полоса -->
     <div class="top-bar">
       <div class="container">
         <div class="row">
@@ -73,25 +71,16 @@ const items = computed<NavigationMenuItem[]>(() => [
       </div>
     </div>
 
-    <!-- Nuxt UI Header -->
     <UHeader class="main-header">
-      <!-- Логотип -->
       <template #title>
-        <a class="navbar-brand" href="/">Gost.By</a>
+        <ULink to="/" class="navbar-brand">Gost.By</ULink>
       </template>
 
-      <!-- Desktop меню -->
       <UNavigationMenu
           :items="items"
           class="desktop-menu"
       />
 
-      <!-- Правая часть -->
-      <template #right>
-        <UColorModeButton />
-      </template>
-
-      <!-- Mobile меню -->
       <template #body>
         <UNavigationMenu
             :items="items"
@@ -123,7 +112,6 @@ const items = computed<NavigationMenuItem[]>(() => [
   align-items: center;
 }
 
-/* Корзина */
 .basket .fa {
   margin-right: 5px;
 }
@@ -141,12 +129,10 @@ const items = computed<NavigationMenuItem[]>(() => [
   color: white;
 }
 
-/* Desktop меню */
 .desktop-menu {
   display: flex;
 }
 
-/* Mobile скрыто */
 .mobile-menu {
   display: none;
 }
