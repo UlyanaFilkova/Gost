@@ -71,7 +71,7 @@ const items = computed<NavigationMenuItem[]>(() => [
       </div>
     </div>
 
-    <UHeader class="main-header">
+    <UHeader class="main-header" mode="slideover">
       <template #title>
         <ULink to="/" class="navbar-brand">Gost.By</ULink>
       </template>
@@ -93,19 +93,26 @@ const items = computed<NavigationMenuItem[]>(() => [
 </template>
 
 <style scoped>
+
 /* ---------------- Верхняя панель ---------------- */
 
 .top-bar {
   background: var(--color-bg-light);
-  padding: 8px 0;
+  padding: 12px 0;
   font-size: 14px;
   color: var(--color-text);
+}
+
+.container {
+  margin: 0 auto;
 }
 
 .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 20px;
+  gap: 40px;
 }
 
 /* ---------------- Основной хедер ---------------- */
