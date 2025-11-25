@@ -125,7 +125,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 .navbar-brand {
   font-size: 22px;
   text-decoration: none;
-  color: var(--color-text-light);
+  color: var(--color-text);
 }
 
 .desktop-menu a,
