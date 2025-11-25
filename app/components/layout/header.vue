@@ -93,17 +93,13 @@ const items = computed<NavigationMenuItem[]>(() => [
 </template>
 
 <style scoped>
-
 /* ---------------- Верхняя панель ---------------- */
 
 .top-bar {
-  background: #f5f5f5;
+  background: var(--color-bg-light);
   padding: 8px 0;
   font-size: 14px;
-}
-
-.location .fa {
-  margin-right: 6px;
+  color: var(--color-text);
 }
 
 .row {
@@ -112,29 +108,36 @@ const items = computed<NavigationMenuItem[]>(() => [
   align-items: center;
 }
 
-.basket .fa {
-  margin-right: 5px;
-}
-
 /* ---------------- Основной хедер ---------------- */
 
 .main-header {
   background: var(--color-primary) !important;
-  color: white;
+  color: var(--color-text-light);
 }
 
 .navbar-brand {
   font-size: 22px;
   text-decoration: none;
-  color: white;
+  color: var(--color-text-light);
+}
+
+.desktop-menu a,
+.mobile-menu a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
 }
 
 .desktop-menu {
   display: flex;
+  gap: 1rem;
 }
 
 .mobile-menu {
   display: none;
+  background: var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
 }
 
 /* ---------------- Адаптив ---------------- */
@@ -148,5 +151,4 @@ const items = computed<NavigationMenuItem[]>(() => [
     display: block !important;
   }
 }
-
 </style>

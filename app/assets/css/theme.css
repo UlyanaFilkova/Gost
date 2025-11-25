@@ -1,7 +1,7 @@
 :root {
     /* Основная палитра */
     --color-primary: #2c3e50;
-    --color-primary-hover: #1f2d3a;
+    --color-primary-hover: #243341;
 
     --color-accent: #e67e22;
     --color-accent-hover: #cf711c;
@@ -9,11 +9,15 @@
     --color-bg-light: #f5f5f5;
     --color-bg-dark: #1a1a1a;
 
-    --color-text: #333;
-    --color-text-light: #fff;
+    --color-text: #333333;
+    --color-text-light: #ffffff;
 
-    /* Цвета для компонентов Nuxt UI */
+    /* Nuxt UI */
     --ui-primary: var(--color-primary);
     --ui-background: var(--color-bg-light);
     --ui-text: var(--color-text);
+
+    /* Дополнительные оттенки */
+    --color-gray-dark: #555555;
+    --color-gray-light: #bbbbbb;
 }
