@@ -53,9 +53,7 @@
 
       <div class="row bottom">
         <p class="copyright">
-          ООО Мультитул © |
-          Разработка сайта —
-          <a href="https://50tex.by" target="_blank">50 текс</a>
+          ООО Мультитул ©
         </p>
       </div>
     </div>
