@@ -1,43 +1,81 @@
 <template>
   <div class="product-page">
-    <UICarouselGallery :items="product.images" />
+    <UBreadcrumb :items="breadcrumbs" class="breadcrumb" />
+    <div class="top-block">
 
-    <div class="info">
-      <h1 class="title">{{ product.name }}</h1>
-
-      <div class="brand">{{ product.brand }}</div>
-
-      <div class="rating" v-if="product.rating">
-        ⭐ {{ product.rating }}/{{ product.max_rating }}
+      <!-- Галерея -->
+      <div class="gallery">
+        <UICarouselGallery :items="product.images" />
       </div>
 
-      <div class="price">{{ product.price.full }}</div>
+      <!-- Информация о товаре -->
+      <div class="info">
+        <h1 class="title">{{ product.name }}</h1>
 
-      <div class="availability"
-           :class="{ in_stock: product.availability_status === 'in_stock' }">
-        {{ product.availability }}
+        <div class="brand">Бренд: {{ product.brand }}</div>
+
+        <div class="rating" v-if="product.rating">
+          ⭐ {{ product.rating }}/{{ product.max_rating }}
+        </div>
+
+        <div class="price">{{ product.price.full }}</div>
+
+        <div
+            class="availability"
+            :class="{ in_stock: product.availability_status === 'in_stock' }"
+        >
+          {{ product.availability }}
+        </div>
+
+        <UIButton variant="primary" size="lg" block>
+          В корзину
+        </UIButton>
       </div>
 
-      <UIButton variant="primary" size="lg" block>
-        В корзину
-      </UIButton>
     </div>
 
-    <div class="section">
-      <h2>Характеристики</h2>
-      <table class="features">
-        <tbody>
-        <tr v-for="f in product.features" :key="f.name">
-          <td class="f-name">{{ f.name }}</td>
-          <td class="f-value">{{ f.value }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- ===== Tabs ===== -->
+    <div class="section mt-10">
+      <UTabs v-model="activeTab">
 
-    <div class="section">
-      <h2>Описание</h2>
-      <p class="description" v-html="product.description" />
+        <!-- Заголовки табов -->
+        <UTabList>
+          <UTab name="description">Описание</UTab>
+          <UTab name="features">Характеристики</UTab>
+          <UTab name="reviews">Отзывы</UTab>
+        </UTabList>
+
+        <!-- Контент табов -->
+        <UTabPanels>
+
+          <!-- Описание -->
+          <UTabPanel name="description">
+            <div class="tab-content">
+              <p v-html="product.description" class="description"/>
+            </div>
+          </UTabPanel>
+
+          <!-- Характеристики -->
+          <UTabPanel name="features">
+            <table class="features">
+              <tbody>
+              <tr v-for="f in product.features" :key="f.name">
+                <td class="f-name">{{ f.name }}</td>
+                <td class="f-value">{{ f.value }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </UTabPanel>
+
+          <!-- Отзывы -->
+          <UTabPanel name="reviews">
+            <div class="reviews-placeholder">
+              Отзывов пока нет 😔
+            </div>
+          </UTabPanel>
+
+        </UTabPanels>
+      </UTabs>
     </div>
 
   </div>
@@ -49,55 +87,30 @@ import type { ProductData } from '~/types/product'
 
 const product: ProductData = productMock
 
-const items = product.images
+const activeTab = ref('description')
 
-
-const carousel = useTemplateRef('carousel')
-const activeIndex = ref(0)
-
-function onClickPrev() {
-  activeIndex.value--
-}
-function onClickNext() {
-  activeIndex.value++
-}
-function onSelect(index: number) {
-  activeIndex.value = index
-}
-
-function select(index: number) {
-  activeIndex.value = index
-
-  carousel.value?.emblaApi?.scrollTo(index)
-}
+const breadcrumbs = ref([
+  { label: 'Каталог', to: '/catalog' },
+  { label: product.brand, to: `/catalog?brand=${product.brand}` },
+  { label: product.name }
+])
 </script>
 
 <style scoped>
-.product-page {
+.breadcrumb{
+  margin-bottom: 20px;
+}
+
+.top-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  padding: 20px 0;
 }
 
 @media (max-width: 900px) {
-  .product-page {
+  .top-block {
     grid-template-columns: 1fr;
   }
-}
-
-.gallery {
-  width: 100%;
-}
-
-.carousel {
-  border-radius: 12px;
-}
-
-.carousel-img {
-  width: 100%;
-  height: auto;
-  display: block;
 }
 
 .info {
@@ -109,7 +122,6 @@ function select(index: number) {
 .title {
   font-size: 28px;
   font-weight: bold;
-  color: var(--color-primary);
 }
 
 .brand {
@@ -124,27 +136,15 @@ function select(index: number) {
 
 .price {
   font-size: 26px;
-  font-weight: 700;
+  font-weight: bold;
   color: var(--color-accent);
 }
 
 .availability {
   font-size: 15px;
-  color: var(--color-gray-dark);
 }
 .availability.in_stock {
   color: #28a745;
-  font-weight: 600;
-}
-
-.section {
-  grid-column: 1 / -1;
-  margin-top: 40px;
-}
-
-.section h2 {
-  font-size: 22px;
-  margin-bottom: 16px;
   font-weight: 600;
 }
 
@@ -157,7 +157,7 @@ function select(index: number) {
 }
 
 .features tr:nth-child(even) {
-  background: rgba(0,0,0,0.03);
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .features td {
@@ -178,6 +178,13 @@ function select(index: number) {
 .description {
   font-size: 15px;
   line-height: 1.6;
+}
+
+.reviews-placeholder {
+  padding: 20px;
+  font-size: 15px;
   color: var(--color-gray-dark);
+  background: rgba(0,0,0,0.05);
+  border-radius: 10px;
 }
 </style>
