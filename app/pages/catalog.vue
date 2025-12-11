@@ -10,6 +10,7 @@ import { product } from '~/data/mocks/products'
 
 <style scoped>
 .grid {
+  width: 100%;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
