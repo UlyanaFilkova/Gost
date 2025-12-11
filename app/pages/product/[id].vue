@@ -2,23 +2,35 @@
   <div class="product-page">
     <div class="gallery">
       <UCarousel
-          :items="product.images"
-          class="carousel"
+          ref="carousel"
+          v-slot="{ item }"
           arrows
-          dots
-          :prev="{ color: 'primary' }"
-          :next="{ variant: 'solid' }"
-          :autoplay="{ delay: 2000 }"
+          :items="items"
+          :prev="{ onClick: onClickPrev, color: 'primary' }"
+          :next="{ onClick: onClickNext, variant: 'solid' }"
+          class="carousel"
+          @select="onSelect"
       >
-        <template #default="{ item }">
-          <img
-              :src="item.src"
-              :srcset="item.srcset"
-              :alt="item.alt || product.name"
-              class="carousel-img"
-          />
-        </template>
+        <img :src="item.src" class="carousel-img" />
       </UCarousel>
+
+      <div class="flex gap-1 justify-between pt-4 max-w-xs mx-auto">
+        <div
+            v-for="(item, index) in items"
+            :key="index"
+            class="size-11 opacity-25 hover:opacity-100 transition-opacity"
+            :class="{ 'opacity-100': activeIndex === index }"
+            @click="select(index)"
+        >
+          <img :src="item.src"
+               :alt="item.alt"
+               width="44"
+               height="44"
+               class="rounded-lg"
+          >
+        </div>
+      </div>
+
     </div>
 
     <div class="info">
@@ -67,6 +79,28 @@ import { productMock } from '~/data/mocks/products'
 import type { ProductData } from '~/types/product'
 
 const product: ProductData = productMock
+
+const items = product.images
+
+
+const carousel = useTemplateRef('carousel')
+const activeIndex = ref(0)
+
+function onClickPrev() {
+  activeIndex.value--
+}
+function onClickNext() {
+  activeIndex.value++
+}
+function onSelect(index: number) {
+  activeIndex.value = index
+}
+
+function select(index: number) {
+  activeIndex.value = index
+
+  carousel.value?.emblaApi?.scrollTo(index)
+}
 </script>
 
 <style scoped>
@@ -89,7 +123,6 @@ const product: ProductData = productMock
 
 .carousel {
   border-radius: 12px;
-  //overflow: hidden;
 }
 
 .carousel-img {
