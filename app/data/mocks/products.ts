@@ -1,5 +1,4 @@
-export const product = {
-  "product": {
+export const productMock = {
     "id": "462508",
     "sku_id": "55830",
     "url": "/press-gidravlicheskiy-s-manometrom-napolnyy-75t-ruchnoy-pnevmo-privod-rab-vysota-0-900mm-rab-shirina-800mm-rab-stol-270kh800mm-khod-shtoka-240mm_1/",
@@ -37,5 +36,4 @@ export const product = {
     "quick_view_url": "/press-gidravlicheskiy-s-manometrom-napolnyy-75t-ruchnoy-pnevmo-privod-rab-vysota-0-900mm-rab-shirina-800mm-rab-stol-270kh800mm-khod-shtoka-240mm_1/",
     "add_to_cart_action": "/cart/add/",
     "default_quantity": 1
-  }
 }

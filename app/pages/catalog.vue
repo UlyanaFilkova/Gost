@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { product } from '~/data/mocks/products'
+import { productMock } from '~/data/mocks/products'
+import type { ProductData } from '~/types/product'
+
+const product: ProductData = productMock
 </script>
 
 <template>
   <div class="grid">
-    <ProductCard :product="product.product" />
+    <ProductCard :product="product" />
   </div>
 </template>
 

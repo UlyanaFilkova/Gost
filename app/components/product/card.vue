@@ -32,11 +32,11 @@
 </template>
 
 <script setup lang="ts">
-interface ProductCardProps {
-  product: any
-}
+import type { ProductData } from '~/types/product'
 
-defineProps<ProductCardProps>()
+const props = defineProps<{
+  product: ProductData
+}>()
 </script>
 
 <style scoped>
