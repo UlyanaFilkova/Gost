@@ -27,7 +27,9 @@
       {{ product.availability }}
     </div>
 
-    <button class="add-btn">В корзину</button>
+    <UIButton variant="primary" size="md" block>
+      В корзину
+    </UIButton>
   </div>
 </template>
 
