@@ -1,37 +1,6 @@
 <template>
   <div class="product-page">
-    <div class="gallery">
-      <UCarousel
-          ref="carousel"
-          v-slot="{ item }"
-          arrows
-          :items="items"
-          :prev="{ onClick: onClickPrev, color: 'primary' }"
-          :next="{ onClick: onClickNext, variant: 'solid' }"
-          class="carousel"
-          @select="onSelect"
-      >
-        <img :src="item.src" class="carousel-img" />
-      </UCarousel>
-
-      <div class="flex gap-1 justify-between pt-4 max-w-xs mx-auto">
-        <div
-            v-for="(item, index) in items"
-            :key="index"
-            class="size-11 opacity-25 hover:opacity-100 transition-opacity"
-            :class="{ 'opacity-100': activeIndex === index }"
-            @click="select(index)"
-        >
-          <img :src="item.src"
-               :alt="item.alt"
-               width="44"
-               height="44"
-               class="rounded-lg"
-          >
-        </div>
-      </div>
-
-    </div>
+    <UICarouselGallery :items="product.images" />
 
     <div class="info">
       <h1 class="title">{{ product.name }}</h1>
